@@ -45,7 +45,7 @@ def check_meta_tag(domain, prefix, code):
     Returns true if verification suceeded.
     """
     url = '://{}'.format(domain)
-    meta = re.compile('<meta\s+name="{}"\s+content="{}"/?>'.format(prefix, code),
+    meta = re.compile('<meta\s+name=[\'\"]{}[\'\"]\s+content=[\'\"]{}[\'\"]\s*/?>|<meta\s+content=[\'\"]{}[\'\"]\s+name=[\'\"]{}[\'\"]\s*/?>'.format(prefix, code),
                       flags=re.MULTILINE | re.IGNORECASE)
     for proto in ('http', 'https'):
         try:
