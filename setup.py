@@ -22,6 +22,7 @@ setup(
     packages=['domcheck'],
     package_dir={'domcheck': 'domcheck'},
     install_requires=['dnspython'],
+    test_suite='test',
     license="MIT",
     classifiers=[
         'Development Status :: 4 - Beta',
