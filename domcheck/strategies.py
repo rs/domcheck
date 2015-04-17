@@ -72,7 +72,8 @@ def check_meta_tag(domain, prefix, code):
         try:
             res = urlopen(proto + url)
             if res.code == 200:
-                content = res.read()
+                # Expect the </head> to be found in the first 100k of the page
+                content = res.read(100000)
                 res.close()
                 return search_meta_tag(content, prefix, code)
             else:
@@ -96,7 +97,8 @@ def check_html_file(domain, prefix, code):
         try:
             res = urlopen(proto + url)
             if res.code == 200:
-                content = res.read()
+                # Read 10k max
+                content = res.read(10000)
                 res.close()
                 if token in content:
                     return True
