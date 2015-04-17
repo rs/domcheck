@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-__version__ = "1.1"
+__version__ = "1.1.1"
 
 from .strategies import check_dns_txt, check_dns_cname, check_meta_tag, check_html_file
 
