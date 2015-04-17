@@ -39,18 +39,19 @@ def check_dns_cname(domain, prefix, code):
         pass
     return False
 
+
 def search_meta_tag(html_doc, prefix, code):
-  """
-  Checks whether the html_doc contains a meta matching the prefix & code
-  """
-  meta = re.compile('<meta\s+name=([\'\"]){0}\\1\s+content=([\'\"]){1}\\2\s*/?>|<meta\s+content=([\'\"]){1}\\3\s+name=([\'\"]){0}\\4\s*/?>'.format(prefix, code),
-                    flags=re.MULTILINE | re.IGNORECASE)
-  m = meta.search(html_doc)
-  if m:
-    head = re.search(r'</head>', html_doc, flags=re.IGNORECASE)
-    if head and m.start() < head.start():
-      return True
-  return False
+    """
+    Checks whether the html_doc contains a meta matching the prefix & code
+    """
+    meta = re.compile('<meta\s+name=([\'\"]){0}\\1\s+content=([\'\"]){1}\\2\s*/?>|<meta\s+content=([\'\"]){1}\\3\s+name=([\'\"]){0}\\4\s*/?>'.format(prefix, code),
+                      flags=re.MULTILINE | re.IGNORECASE)
+    m = meta.search(html_doc)
+    if m:
+        head = re.search(r'</head>', html_doc, flags=re.IGNORECASE)
+        if head and m.start() < head.start():
+            return True
+    return False
 
 
 def check_meta_tag(domain, prefix, code):
@@ -62,16 +63,16 @@ def check_meta_tag(domain, prefix, code):
     """
     url = '://{}'.format(domain)
     for proto in ('http', 'https'):
-      try:
-          res = urllib2.urlopen(proto + url)
-          if res.code == 200:
-              content = res.read()
-              res.close()
-              return search_meta_tag(content, prefix, code)
-          else:
-              res.close()
-      except:
-          pass
+        try:
+            res = urllib2.urlopen(proto + url)
+            if res.code == 200:
+                content = res.read()
+                res.close()
+                return search_meta_tag(content, prefix, code)
+            else:
+                res.close()
+        except:
+            pass
     return False
 
 
