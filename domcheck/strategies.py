@@ -44,8 +44,8 @@ def search_meta_tag(html_doc, prefix, code):
     """
     Checks whether the html_doc contains a meta matching the prefix & code
     """
-    meta = re.compile('<meta\s+name=([\'\"]){0}\\1\s+content=([\'\"]){1}\\2\s*/?>|<meta\s+content=([\'\"]){1}\\3\s+name=([\'\"]){0}\\4\s*/?>'.format(prefix, code),
-                      flags=re.MULTILINE | re.IGNORECASE)
+    regex = '<meta\s+name=([\'\"]){0}\\1\s+content=([\'\"]){1}\\2\s*/?>|<meta\s+content=([\'\"]){1}\\3\s+name=([\'\"]){0}\\4\s*/?>'.format(prefix, code)
+    meta = re.compile(regex, flags=re.MULTILINE | re.IGNORECASE)
     m = meta.search(html_doc)
     if m:
         head = re.search(r'</head>', html_doc, flags=re.IGNORECASE)

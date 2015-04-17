@@ -41,5 +41,4 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Site Management',
         'Topic :: Security',
     ]
- )
-
+)
