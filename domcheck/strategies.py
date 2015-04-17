@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import dns.resolver
-import urllib2
 import re
+
+try:
+    # For Python 3.0 and later
+    from urllib.request import urlopen
+except ImportError:
+    # Fall back to Python 2's urllib2
+    from urllib2 import urlopen
 
 
 def check_dns_txt(domain, prefix, code):
@@ -64,7 +70,7 @@ def check_meta_tag(domain, prefix, code):
     url = '://{}'.format(domain)
     for proto in ('http', 'https'):
         try:
-            res = urllib2.urlopen(proto + url)
+            res = urlopen(proto + url)
             if res.code == 200:
                 content = res.read()
                 res.close()
@@ -88,7 +94,7 @@ def check_html_file(domain, prefix, code):
     token = '{}={}'.format(prefix, code)
     for proto in ('http', 'https'):
         try:
-            res = urllib2.urlopen(proto + url)
+            res = urlopen(proto + url)
             if res.code == 200:
                 content = res.read()
                 res.close()
