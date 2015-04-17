@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import domcheck
+import sys
 
 try:
     from setuptools import setup
@@ -10,9 +10,14 @@ except ImportError:
 with open('README.rst', 'r') as f:
     readme = f.read()
 
+if sys.version_info >= (3, 2):
+    install_requires = ["dnspython3 >= 1.12.0"]
+else:
+    install_requires = ["dnspython >= 1.12.0"]
+
 setup(
     name='domcheck',
-    version=domcheck.__version__,
+    version='1.1.2',
     description='Domain Ownership Checker',
     long_description=readme,
     author='Olivier Poitrey',
@@ -21,8 +26,9 @@ setup(
     keywords=["domain", "validation", "verification", "check", "ownership", "dns", "txt", "cname", "meta"],
     packages=['domcheck'],
     package_dir={'domcheck': 'domcheck'},
-    install_requires=['dnspython'],
+    install_requires=install_requires,
     test_suite='test',
+    tests_require=['flake8', 'nose'],
     license="MIT",
     classifiers=[
         'Development Status :: 4 - Beta',

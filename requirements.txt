@@ -1,3 +1,0 @@
-nose
-flake8
-dnspython
