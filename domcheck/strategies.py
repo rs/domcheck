@@ -25,13 +25,16 @@ def check_dns_txt(domain, prefix, code):
 def check_dns_cname(domain, prefix, code):
     """
     Validates a domain by checking the existance of the CNAME record on the domain as:
-    {prefix}-{code}.{domain}.
+    {prefix}-{code}.{domain} pointing to a domain (usually yours) which the host is {prefix}
+    (i.e.: {prefix}.yourdomain.com).
 
     Returns true if verification suceeded.
     """
     fqdn = '{}-{}.{}'.format(prefix, code, domain)
     try:
-        return len(dns.resolver.query(fqdn, 'CNAME')) >= 1
+        for rr in dns.resolver.query(fqdn, 'CNAME'):
+            if rr.to_text().startswith(prefix + '.'):
+                return True
     except:
         pass
     return False
