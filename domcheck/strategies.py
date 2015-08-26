@@ -5,10 +5,10 @@ import re
 
 try:
     # For Python 3.0 and later
-    from urllib.request import urlopen
+    from urllib.request import urlopen, Request
 except ImportError:
     # Fall back to Python 2's urllib2
-    from urllib2 import urlopen
+    from urllib2 import urlopen, Request
 
 
 def check_dns_txt(domain, prefix, code):
@@ -95,7 +95,8 @@ def check_html_file(domain, prefix, code):
     token = '{}={}'.format(prefix, code)
     for proto in ('http', 'https'):
         try:
-            res = urlopen(proto + url)
+            req = Request(proto + url, headers={'User-Agent': 'Mozilla/5.0; Domcheck/1.0'})
+            res = urlopen(req)
             if res.code == 200:
                 # Read 10k max
                 content = res.read(10000)
