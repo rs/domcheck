@@ -17,7 +17,7 @@ else:
 
 setup(
     name='domcheck',
-    version='1.1.3',
+    version='1.1.4',
     description='Domain Ownership Checker',
     long_description=readme,
     author='Olivier Poitrey',
