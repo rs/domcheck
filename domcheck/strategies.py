@@ -70,7 +70,8 @@ def check_meta_tag(domain, prefix, code):
     url = '://{}'.format(domain)
     for proto in ('http', 'https'):
         try:
-            res = urlopen(proto + url)
+            req = Request(proto + url, headers={'User-Agent': 'Mozilla/5.0; Domcheck/1.0'})
+            res = urlopen(req, timeout=2)
             if res.code == 200:
                 # Expect the </head> to be found in the first 100k of the page
                 content = res.read(100000)
@@ -96,7 +97,7 @@ def check_html_file(domain, prefix, code):
     for proto in ('http', 'https'):
         try:
             req = Request(proto + url, headers={'User-Agent': 'Mozilla/5.0; Domcheck/1.0'})
-            res = urlopen(req)
+            res = urlopen(req, timeout=2)
             if res.code == 200:
                 # Read 10k max
                 content = res.read(10000)
