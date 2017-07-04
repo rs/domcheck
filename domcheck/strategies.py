@@ -100,7 +100,7 @@ def check_html_file(domain, prefix, code):
             res = urlopen(req, timeout=2)
             if res.code == 200:
                 # Read 10k max
-                content = res.read(10000)
+                content = str(res.read(10000))
                 res.close()
                 if token in content:
                     return True
