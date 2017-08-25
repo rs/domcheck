@@ -78,7 +78,6 @@ def check_meta_tag(domain, prefix, code):
             return search_meta_tag(content, prefix, code)
         else:
             res.close()
-    return False
 
 
 def check_html_file(domain, prefix, code):
