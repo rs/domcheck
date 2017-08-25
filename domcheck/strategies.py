@@ -69,18 +69,15 @@ def check_meta_tag(domain, prefix, code):
     """
     url = '://{}'.format(domain)
     for proto in ('http', 'https'):
-        try:
-            req = Request(proto + url, headers={'User-Agent': 'Mozilla/5.0; Domcheck/1.0'})
-            res = urlopen(req, timeout=2)
-            if res.code == 200:
-                # Expect the </head> to be found in the first 100k of the page
-                content = res.read(100000)
-                res.close()
-                return search_meta_tag(content, prefix, code)
-            else:
-                res.close()
-        except:
-            pass
+        req = Request(proto + url, headers={'User-Agent': 'Mozilla/5.0; Domcheck/1.0'})
+        res = urlopen(req, timeout=2)
+        if res.code == 200:
+            # Expect the </head> to be found in the first 100k of the page
+            content = res.read(100000)
+            res.close()
+            return search_meta_tag(content, prefix, code)
+        else:
+            res.close()
     return False
 
 
