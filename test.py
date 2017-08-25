@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from domcheck.strategies import search_meta_tag
+from domcheck.strategies import search_meta_tag, check_meta_tag
 
 
 class TestMetaSearch(unittest.TestCase):
@@ -30,6 +30,9 @@ class TestMetaSearch(unittest.TestCase):
         self.assertFalse(search_meta_tag('<meta name="foo" content=\'bar"></head>', 'foo', 'bar'))
         self.assertFalse(search_meta_tag('<meta content="bar\' content="foo"></head>', 'foo', 'bar'))
         self.assertFalse(search_meta_tag('<meta content="bar" content=\'foo"></head>', 'foo', 'bar'))
+
+    def tets_metascan(self):
+        self.assertTrue(check_meta_tag(domain="metascan.ru",prefix="metascan-verification", code="qjc3oe9ud3e649hz"))
 
 if __name__ == '__main__':
     unittest.main()
