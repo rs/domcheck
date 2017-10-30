@@ -2,6 +2,8 @@
 
 import dns.resolver
 import re
+import logging
+logger = logging.getLogger(__name__)
 
 try:
     # For Python 3.0 and later
@@ -24,7 +26,7 @@ def check_dns_txt(domain, prefix, code):
             if token in rr.to_text():
                 return True
     except:
-        pass
+        logger.debug('', exc_info=True)
     return False
 
 
@@ -42,7 +44,7 @@ def check_dns_cname(domain, prefix, code):
             if rr.to_text().startswith(prefix + '.'):
                 return True
     except:
-        pass
+        logger.debug('', exc_info=True)
     return False
 
 
@@ -80,7 +82,7 @@ def check_meta_tag(domain, prefix, code):
             else:
                 res.close()
         except:
-            pass
+            logger.debug('', exc_info=True)
     return False
 
 
@@ -107,5 +109,5 @@ def check_html_file(domain, prefix, code):
             else:
                 res.close()
         except:
-            pass
+             logger.debug('', exc_info=True)
     return False
