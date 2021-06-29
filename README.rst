@@ -33,7 +33,8 @@ Simple usage will check the domain with all available strategies and return ``Tr
     code = "myserviceK2d8a0xdhh"
 
     if domcheck.check(domain, prefix, code):
-        print "This domain is verified"
+        print("This domain is verified")
+
 
 You may filter strategies by passing a coma separated list of strategies:
 
